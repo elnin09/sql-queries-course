@@ -64,3 +64,17 @@ SELECT * from lpad(emp.job,6,'X') from emp;
 -- XCLERK -> x is appended from the left
 ```
 
+
+##### GREATEST / LEAST
+
+- Greatest function returns the greatest value in a list
+- The least function returns the lowest value in a list of expressions
+- First expression used to determine data type
+
+``` SQL
+greatest(expression1,expression2,expression3)
+SELECT emp.* greatest(least(sal,3000),1000) from emp;
+-- this would give me a salary between 1000 and 3000
+
+```
+
