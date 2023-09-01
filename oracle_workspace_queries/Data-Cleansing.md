@@ -137,6 +137,9 @@ UNPIVOT(MEASURE_COL FOR NEW_COL_NAME IN (PIVOT_COL_LIST))
 SELECT * from avg_test_scores
 unpivot(avg_score for subject in (MATHS,SCIENCE,ENGLISH))
 
+SELECT * FROM goals_per_season
+UNPIVOT(goals for year in (year_2018 as '2018',year_2019 as '2019' ,year_2020 as '2020'))
+
 ```
 
 - This would basically convert the columns into rows and would do reverse of what is shown in the pivot example above
