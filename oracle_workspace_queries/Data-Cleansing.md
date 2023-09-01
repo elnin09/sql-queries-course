@@ -95,7 +95,7 @@ pivot (sum(population) for region_id in (10,20,30,40,50));
 
   - We basically make region_id as column and the aggregate function is sum 
   - All the columns that we select apart from aggregate and pivot column will appear in the query
-  - Here we are selection region_sub_id, columns (10,20,30,40,50) so total 6 columns a
+  - Here we are selection region_sub_id, columns (10,20,30,40,50) so total 6 columns 
   - The values for columns region_sub_id would be the orignal values
 
   - Also think on what would happen if it were a group by clause
@@ -114,6 +114,16 @@ pivot (sum(population) for region_id in (10,20,30,40,50));
     A     B     10  12  13
     ```
 
+- Anothe example
+
+```SQL
+SELECT * from 
+(SELECT sal,job,deptno from emp)
+pivot (sum(sal) for job in ('PRESIDENT','MAANGER','ANALYST','CLERK','SALESMAN') )
+```
+
+- Output of above will have 6 columns one with deptno and other 5 will be values in job present in the condition
+- The value of column will be sum(sal) and null if no such records exist
 
 ##### UNPIVOT
 
