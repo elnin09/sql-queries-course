@@ -78,3 +78,55 @@ SELECT emp.* greatest(least(sal,3000),1000) from emp;
 
 ```
 
+##### PIVOT
+
+- Pivot allows you to rotate rows into columns in a table
+- Here you can't have a subquery inside in condition you have to provide specfic values
+- Here aggregate function is on population and the pivot component is region_id
+
+
+``` SQL
+SELECT * from 
+(SELECT population,region_id,region_sub_id from eba_countries)
+pivot (sum(population) for region_id in (10,20,30,40,50));
+```
+
+- To explain above we are actually considering all the values of subregion_id and some values of region_id(as columns)
+
+  - We basically make region_id as column and the aggregate function is sum 
+  - All the columns that we select apart from aggregate and pivot column will appear in the query
+  - Here we are selection region_sub_id, columns (10,20,30,40,50) so total 6 columns a
+  - The values for columns region_sub_id would be the orignal values
+
+  - Also think on what would happen if it were a group by clause
+
+    - If we have three rows and 4(3 fields + 1) column(aggr) in group by output , then pivot would have 5 colums and 1 row
+
+    
+    ``` SQL
+    Col1 Col2 Col3  Aggr
+    A     B    C1   10 
+    A     B    C2   12
+    A     B    C3   13
+
+    -- post pivot would be 
+    Col1  Col2   C1  C2  C3
+    A     B     10  12  13
+    ```
+
+
+##### UNPIVOT
+
+- Unpivot transforms columns to rows
+
+```SQL
+
+SELECT * FROM TABLE
+UNPIVOT(MEASURE_COL FOR NEW_COL_NAME IN (PIVOT_COL_LIST))
+
+SELECT * from avg_test_scores
+unpivot(avg_score for subject in (MATHS,SCIENCE,ENGLISH))
+
+```
+
+- This would basically convert the columns into rows and would do reverse of what is shown in the pivot example above
