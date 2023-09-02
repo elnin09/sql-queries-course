@@ -24,7 +24,7 @@
     - ab2 , aA2 , aB3, aD5 are match
     - Ab2 not a match as A is in caps
   
-  - `\d+\w?
+  - `\d+\w?`
   
     - This means 1 or more occurences of digit followed by 0 or 1 occurence of a word/upper case/digit
     - asc no match
@@ -33,7 +33,7 @@
     - abb no match doesn't have 1 digit 
     - 1d is a match
 
-   - `\d\d\w*`
+   - ` \d\d\w* `
 
      - This needs two digits followed by any number of alphanumeric charecter
      - 22 match
@@ -50,6 +50,20 @@
       - 2aaab1 not valid
       - 1a not valid
       - aa not valid
+
+    - `{m}` `{m,}` `{m,n}`
+    
+      - Above means exactly m occurence
+      - Between m and infinity 
+      - Third means between m and n occurence
+    
+    - `\d{2}\w{3}`
+
+      - 234sf matches above
+      - 11abc is a match
+      - 34Dwc is a match
+      - Ad4 is not a match
+      - 24d e doesn't count because ' ' doesn't match \w
 
 
    
