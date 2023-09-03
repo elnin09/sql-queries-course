@@ -165,8 +165,37 @@
   - `REGEXP_SUBSTR(string,pattern[,start_position][,nth_appearance])`
 
   -  `SELECT * from eba_countries where regexp_substr(name,'^A.*a$') = name1`
+  Finding all countries where name starts and ends with an A
 
-  - Finding all countries where name starts and ends with an A
+  - `SELECT regexp_substr(name,'^\w+ ')  from eba_countries `
+    Finding first word of country which contain multiple words
+
+
+- REGEXP_REPLACE
+
+   - Replace a sequence of charecters with another sequence of charecters
+   - `REGEXP_REPLACE(string,pattern,replacement_string[,start_position][,nth_appearance])`
+
+   - `SELECT FULL_NAME, regexp_replace(email_address,'@\w$','@internalmail.com') from customers;`
+   - `SELECT FULL_NAME, regexp_replace(email_address,'\.','-') from customers; --replace . with - in email` 
+
+   - `SELECT FULL_NAME, concat('intermail@',regexp_replace(email_address,'@.*','')) from customers;`
+
+   - `SELECT FULL_NAME, regexp_replace(email_address,'(.*)(@)(.*)','\3\2\1') from customers;`
+
+   - Above example shows usage of back reference and can be very useful in case of regexp_replace . 
+
+<br><br>
+
+- Class Meta Charecter 
+
+  - `[[:alnum]]`
+  - `[[:alpha]]`
+  - `[[:digit]]`
+  - `[[:punct]]`
+
+  - for `\d` we can use `[[:digit]]`
+
 
      
 
