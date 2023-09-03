@@ -1,6 +1,15 @@
 #### REGEX MATCHING
 
 
+##### Links
+
+- [Oracle regex documentation](https://docs.oracle.com/cd/B12037_01/appdev.101/b10795/adfns_re.htm)
+
+- [MYSQL regex documenation](https://dev.mysql.com/doc/refman/8.0/en/regexp.html)
+
+- [MetaChar MYSQL documenation](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#regexp-operator-descriptions)
+
+
 ##### PATTERN MATCHING
 - PATTERN MATCHING
 
@@ -196,8 +205,6 @@
 
   - for `\d` we can use `[[:digit]]`
 
-
-     
 
 
    
