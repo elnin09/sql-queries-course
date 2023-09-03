@@ -1,5 +1,7 @@
 #### REGEX MATCHING
 
+
+##### PATTERN MATCHING
 - PATTERN MATCHING
 
   - `.` matches any single charecter
@@ -51,7 +53,7 @@
       - 1a not valid
       - aa not valid
 
-    - `{m}` `{m,}` `{m,n}`
+    - `{m}` `{m,}` `{m,n}` intervals matching
     
       - Above means exactly m occurence
       - Between m and infinity 
@@ -64,6 +66,109 @@
       - 34Dwc is a match
       - Ad4 is not a match
       - 24d e doesn't count because ' ' doesn't match \w
+
+    -  ` \d{1,}\w? `
+      
+       - This means one ore more digit followed by 0 or 1 alphanumeric charecter
+       -  Matches 2 2a 34523e
+
+    - `\d{1,3}-\d{2}`
+
+       - THis means 1-3 digits followed by - and then exactly 2 digits after that
+
+
+    - Matching charecter list and groups
+     
+     - Syntax `[...]` match charecter list
+     - Sybtax `[^...]` non matching charecter list
+     - `(...)` subexpression or grouping
+     - You can also specify a range using - eg a-z means a-z
+
+    - `[a-z][a-z][a-b]`
+
+      - zza match zzb match zzd not a match
+
+    -  `[ade][^erf]`
+
+       - Means two charecters first can be a,d or e and second anything other than e,r,f  
+
+    -  `[abcde][^a-z](end)`
+
+       - It means starts with any of abcde then contains any char other than a-z (lower case) and then last three charecters are end
+
+       - a9end a1end and so on
+
+    <br>
+    
+    - Pattern Matching OR pipe operator
+
+      - (abc|def) means either abc or def
+      - (a|b|c|d){4}
+      - Means any of a,b,c,d any 4 times
+
+    - Pattern matching back reference
+      
+      - `\n` this means nth sub pattern
+      - `(aa)(bb)\2`  aabbbb
+      - `[abc](aa)(bb)\2` aaabbbb baabbbb caabbbb
+
+
+    - Pattern matching `\`
+
+     - ` (aa)(bb)\* `
+
+      -  aabb* matches so basically \ is used for special charecters
+
+
+    - `^`` and `$` 
+    
+     - ^ matches start of string
+     - $ matches end of string
+     - `^(abe)[a-z]` matches abea abeb abec  .... abez
+     - `col[123]$`  matches col1 col2 col3 
+
+<br> <br>
+
+##### REGEXP FUNCTIONS IN SQL
+
+  - REGEXP_LIKE
+   
+    - Used in where clause
+    - Doesn't need to match the entire string
+    - REGEXP_LIKE(expression,pattern [,match parameter])
+    - `SELECT * from stores where regexp_like(physical_address,'[A-Z]{2} \d{5}$')`
+    - `SELECT * from stores where regexp_like(physical_address,'[A-Z]{2} \d{5}')`
+    - `SELECT * from customers where regexp_like(full_name,'^Ste(ph|v)en')`
+
+<br><br>
+
+  - REGEXP_INSTR
+
+    - Returns an int stating the location of a regex expression in a string
+    - If regex not present then return 0
+    - `REGEXP_INSTR(string,pattern[,start_position][,nth_appearance])`
+    - First two params are mandatory and other two params are optional and 
+    - By default start_position is start of string and nth_apperance is
+    the first appearance of the string 
+
+    - `SELECT * from eba_countries where regexp_instr(name,'n') = 7`
+    Query where 7th charecer in name is n
+    - `SELECT * from eba_countries where regexp_instr(name,'\(.*\)') > 0`
+    Query where name has open and close parenthesis
+
+<br> <br>
+
+- REGEXP_SUBSTR
+
+  - Extracts a substring from a string that specifies a pattern
+
+  - `REGEXP_SUBSTR(string,pattern[,start_position][,nth_appearance])`
+
+  -  `SELECT * from eba_countries where regexp_substr(name,'^A.*a$') = name1`
+
+  - Finding all countries where name starts and ends with an A
+
+     
 
 
    
